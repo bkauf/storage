@@ -31,7 +31,7 @@ spec:
         app: ubuntu
     spec:
       containers:
-      - image: ubuntu:latest
+      - image: bkauf/storage:latest
         name: ubuntu
         command:
           - "sleep"
