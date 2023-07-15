@@ -12,7 +12,4 @@ WORKDIR /var/www/html
 # Copy app files
 COPY storage-traffic.py /var/www/html
 # Install app dependencies
-RUN apt update
-RUN apt install vim
-RUN apt install python3
-
+RUN apt update -y && apt install vim -y && apt install python3 -y
