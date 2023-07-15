@@ -10,6 +10,6 @@ WORKDIR /var/www/html
 #RUN npm install -g nodemon
 
 # Copy app files
-COPY storage-traffic.py /var/www/html
+COPY storage-traffic.py /var/www/html/
 # Install app dependencies
 RUN apt update -y && apt install vim -y && apt install python3 -y
