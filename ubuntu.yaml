@@ -1,0 +1,45 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ubuntupvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  #storageClassName: standard-rwo #GCP 
+  #storageClassName: managed-csi #Azure
+  # #AWS
+  resources:
+    requests:
+      storage: 6Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: ubuntu
+        command:
+          - "sleep"
+          - "604800"
+        volumeMounts:
+        - name: ubuntu-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: ubuntu-persistent-storage
+        persistentVolumeClaim:
+          claimName: ubuntupvc
