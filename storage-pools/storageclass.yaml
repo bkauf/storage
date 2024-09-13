@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: hyperdisk-balanced
+provisioner: pd.csi.storage.gke.io
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+parameters:
+  type: hyperdisk-balanced
+  provisioned-throughput-on-create: "140Mi"
+  provisioned-iops-on-create: "3000"
+  storage-pools: 'projects/anthos-multi-cloud-335819/zones/us-central1-a/storagePools/gke-pool-1,projects/anthos-multi-cloud-335819/zones/us-central1-b/storagePools/gke-pool-2,projects/anthos-multi-cloud-335819/zones/us-central1-c/storagePools/gke-pool-3'
